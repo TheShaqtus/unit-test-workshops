@@ -82,5 +82,19 @@ namespace AccountsTests
             Assert.ThrowsException<ArgumentException>(() => account.Deposit(deposit));
             Assert.AreEqual(startingBalance, account.Balance);
         }
+
+        [TestMethod]
+        public void Deposit__Given_AccountBalanceIs990__When_11DollarsAreDeposited__Then_PreventsDepositFromCompleting()
+        {
+            // Arrange
+            const string testAccountHolder = "Joe Test";
+            const double startingBalance = 990;
+            const double deposit = 11;
+            var account = new CheckingAccount(testAccountHolder, startingBalance);
+
+            // Act and Assert
+            Assert.ThrowsException<ArgumentException>(() => account.Deposit(deposit));
+            Assert.AreEqual(startingBalance, account.Balance);
+        }
     }
 }

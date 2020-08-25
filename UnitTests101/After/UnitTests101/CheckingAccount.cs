@@ -32,10 +32,17 @@ namespace Accounts
         {
             if (amount <= 0)
             {
-                throw new ArgumentException(nameof(amount), "Deposity amount must be positive!");
+                throw new ArgumentException(nameof(amount), "Deposit amount must be positive!");
             }
 
-            Balance += amount;
+            var newBalance = Balance + amount;
+
+            if (newBalance > 1000)
+            {
+                throw new ArgumentException(nameof(amount), "Account cannot have a balance more than $1,000!");
+            }
+
+            Balance = newBalance;
         }
     }
 }
